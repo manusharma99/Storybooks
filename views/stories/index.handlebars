@@ -1,1 +1,19 @@
-<h1>index</h1>
+<h1> Public Stories</h1>
+<div class="row">
+{{#each stories}}
+<div class="col-4">
+  <div class="card" style="width: 18rem;">
+     <img src='{{user.image}}' class="card-img-top" alt="user image">
+     {{user.firstName}}{{user.lastName}}
+    <div class="card-body">
+       <h5 class="card-title">{{title}}</h5>
+       <p class="card-text">{{body}}</p>
+       <a href="/stories/edit/{{id}}" class="btn btn-danger"><i class="fa fa-pencil"></i></a>
+    </div>
+    <a href="/stories/show/{{id}}" class="btn btn-primary">Read more</a> 
+  </div>
+</div>
+{{else}}
+<p>no story found</p>
+{{/each}}
+</div>

@@ -8,7 +8,11 @@ const {ensureAuthenticated,ensureGuest}= require('../helpers/auth');
 
 // stories index
 router.get('/',(req,res)=>{
-res.render('stories/index');
+    Story.find({status:'public'})
+    .populate('user')
+    .then(stories => {
+        return res.render('stories/index',{stories:stories});
+    });
 });
 
 //add stories
@@ -38,8 +42,8 @@ new Story(newStory)
 .save()
 .catch(error=>{throw error})
 .then(Story=> {
-    return res.redirect(`/stories/show/${story.id}`)
-})
+    return res.send('sent');
+});
 });
 
 module.exports=router;
