@@ -1,45 +1,47 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const StorySchema = new Schema({
-title:{
-    type: String,
-    required:true
-},
-body:{
+  title: {
     type: String,
     required: true
-},
-status:{
+  },
+  body: {
     type: String,
-    default:'public' 
-},
-allowComments:{
+    required: true
+  },
+  status: {
+    type: String,
+    default: "public"
+  },
+  allowComments: {
     type: Boolean,
     default: true
-},
-comments:[{
-    commentBody:{
+  },
+  comments: [
+    {
+      commentBody: {
         type: String,
         required: true
-    },
-    commentDate:{
-        type:String,
+      },
+      commentDate: {
+        type: String,
         default: Date.now
-    },
-    commentUser:{
-        type:Schema.Types.ObjectId,
-        ref:'users'
+      },
+      commentUser: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
     }
-}],
-User:{
-    type:Schema.Types.ObjectId,
-    ref:'users'
-},
-Date:{
+  ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "users"
+  },
+  date: {
     type: Date,
     default: Date.now
-}
+  }
 });
 
-mongoose.model('stories',StorySchema,'stories');
+mongoose.model("stories", StorySchema, "stories");
