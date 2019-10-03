@@ -1,1 +1,22 @@
-<h1>show</h1>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{story.title}}</h5>
+                <h4>{{formatDate story.date "MMMM do YYYY"}}</h5>
+                    <p class="card-text">{{{story.body}}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Written by -</h4>
+                <p class="card-text">
+                    <h5>{{story.user.firstName}} {{story.user.lastName}}</h5>
+                </p>
+                <a href="/stories/user/{{story.user.id}}" class="btn btn-primary">more from {{story.user.firstName}}</a>
+            </div>
+        </div>
+    </div>
+</div>

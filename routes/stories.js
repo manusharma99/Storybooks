@@ -19,12 +19,25 @@ router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("stories/add");
 });
 
+// edit stories
+router.get("/edit/:id", (req, res) => {
+  Story.findOne({
+    _id: req.params.id
+  })
+    .populate("user")
+    .then(story => {
+      res.render("stories/edit", { story: story });
+    });
+});
+
 router.get("/show/:id", (req, res) => {
   Story.findOne({
     _id: req.params.id
-  }).then(story => {
-    res.render("stories/show", { story: story });
-  });
+  })
+    .populate("user")
+    .then(story => {
+      res.render("stories/show", { story: story });
+    });
 });
 
 // process stories post request

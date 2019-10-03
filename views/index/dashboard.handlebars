@@ -1,2 +1,26 @@
 <h1>Welcome {{user.firstName}} </h1>
 <h4>Your Stories</h4>
+{{#if stories}}
+<table>
+    <thead>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Status</th>
+    </thead>
+    <tbody>
+        {{#each stories}}
+        <tr>
+            <td><a href="/stories/show/{{id}}">{{title}}</a></td>
+            <td>{{formatDate date 'MMMM do YYYY'}}</td>
+            <td>{{status}}</td>
+            <td><a href="/stories/edit/{{id}}"><i class="fa fa-pencil"></i>Edit</a>
+                <form action="/stories/{{id}}" method="POST">
+                    <button type="submit"><i class="fa fa-remove"></i>delete</button>
+                </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>you have not created any stories yet</p>
+{{/if}}
