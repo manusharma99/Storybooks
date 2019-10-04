@@ -20,3 +20,38 @@
         </div>
     </div>
 </div>
+{{#if story.allowComments}}
+<div class="card text-center">
+    <div class="card-header">
+        Comments
+    </div>
+    <div class="card-body">
+        {{#if user}}
+        <form method="post" action="/stories/comment/{{story.id}}">
+            <div class="form-group">
+                <input type="text" class="form-control" name="commentBody">
+            </div>
+            <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {{else}}
+        <p>please <a href="/auth/google">log in</a> to leave a comment</p>
+        {{/if}}
+    </div>
+    {{#each story.comments}}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{commentUser.image}}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{commentBody}}</h5>
+                    <p class="card-text"><small class="text-muted">Posted on :
+                            {{formatDate commentDate 'MMMM do YYYY'}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{/if}}

@@ -26,7 +26,7 @@ const StorySchema = new Schema({
       },
       commentDate: {
         type: String,
-        default: Date.now
+        default: Date()
       },
       commentUser: {
         type: Schema.Types.ObjectId,
