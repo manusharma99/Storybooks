@@ -90,4 +90,11 @@ router.put("/:id", (req, res) => {
   });
 });
 
+// delete story
+router.delete("/:id", (req, res) => {
+  Story.deleteOne({ _id: req.params.id }).then(() => {
+    res.render("index/dashboard");
+  });
+});
+
 module.exports = router;

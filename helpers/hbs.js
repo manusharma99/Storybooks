@@ -25,5 +25,8 @@ module.exports = {
         new RegExp(">" + selected + "</option"),
         'selected="selected"$&'
       );
+  },
+  log: function(value) {
+    return console.log(value);
   }
 };
