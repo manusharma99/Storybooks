@@ -66,4 +66,28 @@ router.post("/", (req, res) => {
     });
 });
 
+//edit story
+router.put("/:id", (req, res) => {
+  Story.findOne({
+    _id: req.params.id
+  }).then(story => {
+    let allowComments;
+    if (req.body.allowComments) {
+      allowComments = true;
+    } else {
+      allowComments = false;
+    }
+
+    //new values
+    story.title = req.body.title;
+    story.body = req.body.body;
+    story.status = req.body.status;
+    story.allowComments = allowComments;
+
+    story.save().then(story => {
+      res.render("index/dashboard");
+    });
+  });
+});
+
 module.exports = router;

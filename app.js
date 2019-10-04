@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -13,6 +14,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// method override
+app.use(methodOverride("_method"));
 //load user model
 require("./models/Story");
 require("./models/User");
