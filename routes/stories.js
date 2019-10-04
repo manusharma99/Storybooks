@@ -85,7 +85,7 @@ router.put("/:id", (req, res) => {
     story.allowComments = allowComments;
 
     story.save().then(story => {
-      res.render("index/dashboard");
+      res.redirect("/dashboard");
     });
   });
 });
@@ -93,7 +93,7 @@ router.put("/:id", (req, res) => {
 // delete story
 router.delete("/:id", (req, res) => {
   Story.deleteOne({ _id: req.params.id }).then(() => {
-    res.render("index/dashboard");
+    res.redirect("/dashboard");
   });
 });
 
