@@ -8,7 +8,9 @@
       <div class="card-body">
         <h5 class="card-title">{{title}}</h5>
         <p class="card-text">{{truncate body 50}}</p>
-        <a href="/stories/edit/{{id}}" class="btn btn-danger"><i class="fa fa-pencil"></i></a>
+        {{#if user}}
+        {{{editIcon user.id ../user.id id}}}
+        {{/if}}
       </div>
       <a href="/stories/show/{{id}}" class="btn btn-primary">Read more</a>
     </div>

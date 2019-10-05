@@ -1,3 +1,4 @@
+{{#if user}}
 <h1>Edit Story</h1>
 <form action="/stories/{{story.id}}?_method=put" method="POST">
     <input type="hidden" name="_method" value="put">
@@ -36,3 +37,13 @@
         <button type="submit" value="save" class="btn btn-primary">Save</button>
     </div>
 </form>
+{{else}}
+<div class="card text-center">
+    <div class="card-body">
+        <h2>
+            <p class="card-text">please login to edit your story</p>
+        </h2>
+        <a href="/auth/google" class="btn btn-primary">Login In</a>
+    </div>
+</div>
+{{/if}}

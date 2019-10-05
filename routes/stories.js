@@ -9,6 +9,7 @@ const { ensureAuthenticated, ensureGuest } = require("../helpers/auth");
 router.get("/", (req, res) => {
   Story.find({ status: "public" })
     .populate("user")
+    .sort({ date: "desc" })
     .then(stories => {
       return res.render("stories/index", { stories: stories });
     });
@@ -19,14 +20,18 @@ router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("stories/add");
 });
 
-// edit stories
+// edit stories form
 router.get("/edit/:id", (req, res) => {
   Story.findOne({
     _id: req.params.id
   })
     .populate("user")
     .then(story => {
-      res.render("stories/edit", { story: story });
+      if (story.user.id != req.user.id) {
+        res.redirect("/stories");
+      } else {
+        res.render("stories/edit", { story: story });
+      }
     });
 });
 

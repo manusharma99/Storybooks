@@ -27,7 +27,7 @@ require("./config/passport")(passport);
 const keys = require("./config/keys");
 
 //load helpers
-const { truncate, formatDate, select, log } = require("./helpers/hbs");
+const { truncate, formatDate, select, editIcon } = require("./helpers/hbs");
 
 // load routes
 const index = require("./routes/index");
@@ -51,7 +51,7 @@ app.engine(
       truncate: truncate,
       formatDate: formatDate,
       select: select,
-      log: log
+      editIcon: editIcon
     },
     defaultLayout: "main"
   })
