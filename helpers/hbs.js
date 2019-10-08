@@ -39,8 +39,5 @@ module.exports = {
     } else {
       return "";
     }
-  },
-  log: function(value) {
-    return console.log(value);
   }
 };
