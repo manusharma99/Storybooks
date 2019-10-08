@@ -1,22 +1,27 @@
-<h1>Welcome {{user.firstName}} </h1>
-<h4>Your Stories</h4>
+<h1>Welcome {{user.firstName}}</h1>
+<h4>Your stories
+</h4>
 {{#if stories}}
-<table>
+<table class="striped">
     <thead>
-        <th>Title</th>
-        <th>Date</th>
-        <th>Status</th>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
     </thead>
     <tbody>
         {{#each stories}}
         <tr>
             <td><a href="/stories/show/{{id}}">{{title}}</a></td>
-            <td>{{formatDate date 'MMMM do YYYY'}}</td>
-            <td>{{status}}</td>
-            <td><a href="/stories/edit/{{id}}"><i class="fa fa-pencil"></i>Edit</a>
-                <form action="/stories/{{id}}?_method=DELETE" method="POST">
-                    <button type="submit"><i class="fa fa-remove"></i>delete</button>
+            <td>{{formatDate date 'MMMM Do YYYY'}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td><a class="btn left-align" href="/stories/edit/{{id}}"><i class="fa fa-pencil"></i> Edit</a>
+                <form action="/stories/{{id}}?_method=DELETE" method="post" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn red"><i class="fa fa-remove"></i>Delete</button>
                 </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

@@ -5,7 +5,7 @@ const passport = require("passport");
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
-);
+); //means what we require from google
 
 router.get(
   "/google/callback",
@@ -14,16 +14,15 @@ router.get(
     res.redirect("/dashboard");
   }
 );
-
 router.get("/verify", (req, res) => {
   if (req.user) {
-    console.log(req.user);
+    console.log("authenticated");
   } else {
     console.log("not auth");
   }
 });
 router.get("/logout", (req, res) => {
-  req.logOut();
+  req.logout();
   res.redirect("/");
 });
 module.exports = router;

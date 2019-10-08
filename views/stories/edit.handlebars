@@ -1,49 +1,41 @@
-{{#if user}}
 <h1>Edit Story</h1>
-<form action="/stories/{{story.id}}?_method=put" method="POST">
-    <input type="hidden" name="_method" value="put">
-    <div class="form-row">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" name="title" value="{{story.title}}">
-    </div>
-    <br>
-    <div class="form-row">
-        <label for="inputState">Status</label>
-        <select id="inputState" class="form-control" name="status">
-            {{#select story.status}}
-            <option value="public" selected>Public</option>
-            <option value="private">Private</option>
-            <option value="unpublished">Unpublished</option>
-            {{/select}}
-        </select>
-    </div>
-    <br>
-    <div class="form-row">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck" name="allowComments"
-                {{#if story.allowComments}} checked='checked' {{/if}}>
-            <label class="form-check-label" for="gridCheck">
-                Allow Comments
-            </label>
+<div class="row">
+    <form action="/stories/{{story.id}}?_method=PUT" method="post" class="col s12">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" name="title" value="{{story.title}}">
+                <label for="title">Title</label>
+            </div>
         </div>
-    </div>
-    <br>
-    <div class="form-row">
-        <label for="title">Tell us your Story</label>
-        <textarea name="body" class="form-control">{{story.body}}</textarea>
-    </div>
-    <br>
-    <div class="form-row">
-        <button type="submit" value="save" class="btn btn-primary">Save</button>
-    </div>
-</form>
-{{else}}
-<div class="card text-center">
-    <div class="card-body">
-        <h2>
-            <p class="card-text">please login to edit your story</p>
-        </h2>
-        <a href="/auth/google" class="btn btn-primary">Login In</a>
-    </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select name="status">
+                    {{#select story.status}}
+                    <option value="public" selected>Public</option>
+                    <option value="private">Private</option>
+                    <option value="unpublished">Unpublished</option>
+                    {{/select}}
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <p>
+                <input type="checkbox" name="allowComments" class="filled-in" id="filled-in-box" checked="checked">
+                <label for="filled-in-box">Allow Comments</label>
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Tell Us Your Story:</h5>
+                <textarea name="body">{{story.body}}</textarea>
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="btn">
+    </form>
 </div>
-{{/if}}

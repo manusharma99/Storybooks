@@ -1,59 +1,57 @@
 <div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{story.title}}</h5>
-                <h4>{{formatDate story.date "MMMM do YYYY"}}</h5>
-                    <p class="card-text">{{{story.body}}}</p>
+    <div class="col s12 m8">
+        <h3>{{story.title}}
+            <small>{{{editIcon story.user.id user.id story.id false}}}</small>
+        </h3>
+        <div class="card story">
+            <div class="card-content">
+                <span class="card-title">{{formatDate story.date 'MMMM Do YYYY'}}</span>
+                {{{story.body}}}
             </div>
         </div>
-    </div>
-    <div class="col-sm-6">
+
+        {{#if story.allowComments}}
         <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Written by -</h4>
-                <p class="card-text">
-                    <h5>{{story.user.firstName}} {{story.user.lastName}}</h5>
-                </p>
-                <a href="/stories/user/{{story.user.id}}" class="btn btn-primary">more from {{story.user.firstName}}</a>
+            <div class="card-content">
+                <span class="card-title">Comments</span>
+                {{#if user}}
+                <form method="post" action="/stories/comment/{{story.id}}">
+                    <div class="input-field">
+                        <textarea name="commentBody" class="materialize-textarea"></textarea>
+                        <label> Add Comment</label>
+                    </div>
+                    <input type="submit" value="Submit" class="btn">
+                </form>
+                {{else}}
+                <p>Please <a href="/auth/google">log</a> in to leave a comment</p>
+                {{/if}}
             </div>
         </div>
-    </div>
-</div>
-{{#if story.allowComments}}
-<div class="card text-center">
-    <div class="card-header">
-        Comments
-    </div>
-    <div class="card-body">
-        {{#if user}}
-        <form method="post" action="/stories/comment/{{story.id}}">
-            <div class="form-group">
-                <input type="text" class="form-control" name="commentBody">
+
+        {{#each story.comments}}
+        <div class="card">
+            <div class="card-content">
+                <h5>{{commentBody}}</h5>
+                <div class="chip">
+                    <img src="{{commentUser.image}}">
+                    <a href="/stories/user/{{commentUser.id}}"> {{commentUser.firstName}} {{commentUser.lastName}}</a>
+                </div>
+                <br>
+                <small>Posted: {{formatDate commentDate 'MMMM Do YYYY'}}</small>
             </div>
-            <button type="submit" value="submit" class="btn btn-primary">Submit</button>
-        </form>
-        {{else}}
-        <p>please <a href="/auth/google">log in</a> to leave a comment</p>
+        </div>
+        {{/each}}
         {{/if}}
     </div>
-    {{#each story.comments}}
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{commentUser.image}}" class="card-img" alt="...">
+    <div class="col s12 m4">
+        <div class="card center-align">
+            <div class="card-content">
+                <span class="card-title">{{story.user.firstName}} {{story.user.lastName}}</span>
+                <img src="{{story.user.image}}" class="circle responsive-img">
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title">{{commentBody}}</h3>
-                    <h5><small class="text-muted">Comment By - </small><a href="/stories/user/{{commentUser.id}}">
-                            {{commentUser.firstName}} {{commentUser.lastName}}</a></h5>
-                    <p class="card-text"><small class="text-muted">Posted on :
-                            {{formatDate commentDate 'MMMM do YYYY'}}</small></p>
-                </div>
+            <div class="card-action">
+                <a href="/stories/user/{{story.user.id}}">More From {{story.user.firstName}}</a>
             </div>
         </div>
     </div>
-    {{/each}}
 </div>
-{{/if}}
