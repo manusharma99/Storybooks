@@ -4,7 +4,7 @@
   <div class="col-4">
     <div class="card" style="width: 10rem;">
       <img src='{{user.image}}' class="card-img-top" alt="user image">
-      {{user.firstName}}{{user.lastName}}
+      <a href="/stories/user/{{user.id}}">{{user.firstName}}{{user.lastName}}</a>
       <div class="card-body">
         <h5 class="card-title">{{title}}</h5>
         <p class="card-text">{{truncate body 50}}</p>
