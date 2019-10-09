@@ -14,13 +14,7 @@ router.get(
     res.redirect("/dashboard");
   }
 );
-router.get("/verify", (req, res) => {
-  if (req.user) {
-    console.log("authenticated");
-  } else {
-    console.log("not auth");
-  }
-});
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
